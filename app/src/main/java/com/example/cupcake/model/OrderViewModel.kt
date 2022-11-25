@@ -13,6 +13,8 @@ import java.util.*
  *
  *
  */
+private const val PRICE_PER_CUPCAKE = 2.00
+
 class OrderViewModel: ViewModel() {
 
     val dateOptions = getPickupOptions()
@@ -31,6 +33,7 @@ class OrderViewModel: ViewModel() {
 
     fun setQuantity(numberCupcakes: Int) {
         _quantity.value = numberCupcakes
+        updatePrice()
     }
 
     fun setFlavor(desiredFlavor: String) {
@@ -43,6 +46,10 @@ class OrderViewModel: ViewModel() {
 
     fun setDate(pickupDate: String) {
         _date.value = pickupDate
+    }
+
+    private fun updatePrice() {
+        _price.value = (quantity.value ?: 0) * PRICE_PER_CUPCAKE
     }
 
     private fun getPickupOptions(): MutableList<String> {
