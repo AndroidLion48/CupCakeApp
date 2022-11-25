@@ -2,7 +2,9 @@ package com.example.cupcake.model
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -14,8 +16,9 @@ import java.util.*
  *
  */
 private const val PRICE_PER_CUPCAKE = 2.00
+private const val PRICE_FOR_SAME_DAY_PICKUP = 3.00
 
-class OrderViewModel: ViewModel() {
+class OrderViewModel : ViewModel() {
 
     val dateOptions = getPickupOptions()
 
@@ -28,8 +31,10 @@ class OrderViewModel: ViewModel() {
     private val _date = MutableLiveData<String>()
     val date: LiveData<String> = _date
 
-    private val _price= MutableLiveData<Double>()
-    val price: LiveData<Double> = _price
+    private val _price = MutableLiveData<Double>()
+    val price: LiveData<String> = Transformations.map(_price) {
+        NumberFormat.getCurrencyInstance().format(it)
+    }
 
     fun setQuantity(numberCupcakes: Int) {
         _quantity.value = numberCupcakes
@@ -40,16 +45,25 @@ class OrderViewModel: ViewModel() {
         _flavor.value = desiredFlavor
     }
 
-    fun hasNoFlavorSet(): Boolean{
+    fun hasNoFlavorSet(): Boolean {
         return _flavor.value.isNullOrEmpty()
     }
 
     fun setDate(pickupDate: String) {
         _date.value = pickupDate
+        updatePrice()
     }
 
     private fun updatePrice() {
+        var calculatedPrice = (quantity.value ?: 0) * PRICE_PER_CUPCAKE
+
         _price.value = (quantity.value ?: 0) * PRICE_PER_CUPCAKE
+
+        // If the user selecte the first option (today) for pickup, add the surcharge
+        if (dateOptions[0] == _date.value) {
+            calculatedPrice += PRICE_FOR_SAME_DAY_PICKUP
+        }
+        _price.value = calculatedPrice
     }
 
     private fun getPickupOptions(): MutableList<String> {
@@ -65,7 +79,7 @@ class OrderViewModel: ViewModel() {
         return options
     }
 
-    fun resetOrder(){
+    fun resetOrder() {
         _quantity.value = 0
         _date.value = dateOptions[0]
         _flavor.value = ""
