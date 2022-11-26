@@ -22,6 +22,10 @@ class OrderViewModel : ViewModel() {
 
     val dateOptions = getPickupOptions()
 
+    init {
+        resetOrder()
+    }
+
     private val _quantity = MutableLiveData<Int>()
     val quantity: LiveData<Int> = _quantity
 
@@ -86,8 +90,5 @@ class OrderViewModel : ViewModel() {
         _price.value = 0.0
     }
 
-    init {
-        resetOrder()
-    }
 
 }
