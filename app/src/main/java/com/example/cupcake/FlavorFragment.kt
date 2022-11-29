@@ -54,7 +54,6 @@ class FlavorFragment : Fragment() {
             flavorFragment = this@FlavorFragment
         }
     }
-
     /**
      * Navigate to the next screen to choose pickup date.
      */
