@@ -9,18 +9,32 @@ This app demonstrates multiple fragments in an activity, a shared ViewModel acro
 data binding, LiveData, and the Jetpack Navigation component.
 
 
-Pre-requisites
+
+Learning Objectives:
 --------------
-* Familiar with activities and fragments
-* How to use styles and themes in the UI
-* Basic understanding of Jetpack architecture components including ViewModel and LiveData
-* Data binding and binding expressions
-* Kotlin syntax basics
+
+- How to implement recommended app architecture practices within a more advanced use case
+- How to use a shared ViewModel across fragments in an activity
+- How to apply a LiveData transformation
+- How to override lifecycle callback methods to perform operations at different times in the activity lifecycle.
+- How navigation affects the back stack of an app
+- How to implement custom back stack behavior
 
 
-Getting Started
+
+
+Skills displayed in project:
 ---------------
-1. Install Android Studio, if you don't already have it.
-2. Download the sample.
-3. Import the sample into Android Studio.
-4. Build and run the sample.
+
+    * Using Implicit Intent 
+    * Working with collections
+    * Calling and importing methods
+    * Using conditional statements
+    * Using Activities and Intents
+    * Using logs in log cat
+    * Writing Unit Test
+    
+
+
+
+
