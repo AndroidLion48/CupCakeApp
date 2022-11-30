@@ -1,5 +1,6 @@
 Cupcake app
 =================================
+![Demo](https://user-images.githubusercontent.com/92341925/204684063-452146e7-3e77-457f-9a42-ce1ae8eedcd3.gif)
 
 This app contains an order flow for cupcakes with options for quantity, flavor, and pickup date.
 The order details get displayed on an order summary screen and can be shared to another app to
